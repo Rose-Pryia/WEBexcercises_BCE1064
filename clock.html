@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1064</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .clock-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 450px;
+            height: 450px;
+            background-color: white;
+            border: 5px solid black;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+        }
+        canvas {
+            border: 1px solid #000;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock-box">
+        <canvas id="clockCanvas" width="400" height="400"></canvas>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('clockCanvas');
+        const ctx = canvas.getContext('2d');
+        const radius = canvas.width / 2 * 0.9;
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+
+        function drawClock() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawFace();
+            drawNumbers();
+
+            const now = new Date();
+            const hours = now.getHours() % 12;
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            drawHand(hours * 30 + minutes * 0.5, radius * 0.5, 6, '#333'); // Hour hand
+            drawHand(minutes * 6 + seconds * 0.1, radius * 0.7, 4, '#555'); // Minute hand
+            drawHand(seconds * 6, radius * 0.85, 2, '#D40000'); // Second hand
+
+            drawPivot();
+            requestAnimationFrame(drawClock);
+        }
+
+        function drawFace() {
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+            ctx.fillStyle = '#FFD700'; // Gold color for clock face
+            ctx.fill();
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 4;
+            ctx.stroke();
+
+            ctx.lineWidth = 1;
+            for (let i = 0; i < 60; i++) {
+                const angle = (i * 6) * Math.PI / 180;
+                const tickLength = i % 5 === 0 ? radius * 0.1 : radius * 0.05;
+
+                const x1 = centerX + Math.sin(angle) * (radius - tickLength);
+                const y1 = centerY - Math.cos(angle) * (radius - tickLength);
+                const x2 = centerX + Math.sin(angle) * radius;
+                const y2 = centerY - Math.cos(angle) * radius;
+
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.strokeStyle = i % 5 === 0 ? '#333' : '#999';
+                ctx.lineWidth = i % 5 === 0 ? 2 : 1;
+                ctx.stroke();
+            }
+        }
+
+        function drawNumbers() {
+            ctx.font = radius * 0.15 + 'px Arial';
+            ctx.fillStyle = '#333';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            for (let num = 1; num <= 12; num++) {
+                const angle = (num * 30 - 90) * Math.PI / 180;
+                const x = centerX + Math.cos(angle) * (radius * 0.8);
+                const y = centerY + Math.sin(angle) * (radius * 0.8);
+                ctx.fillText(num.toString(), x, y);
+            }
+        }
+
+        function drawHand(angle, length, width, color) {
+            const radians = (angle - 90) * Math.PI / 180;
+            ctx.beginPath();
+            ctx.lineWidth = width;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = color;
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(centerX + Math.cos(radians) * length, centerY + Math.sin(radians) * length);
+            ctx.stroke();
+        }
+
+        function drawPivot() {
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 5, 0, Math.PI * 2);
+            ctx.fillStyle = '#D40000';
+            ctx.fill();
+        }
+
+        drawClock();
+    </script>
+</body>
+</html>

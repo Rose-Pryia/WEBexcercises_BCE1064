@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1064</title>
+</head>
+<body>
+    <style>
+        #main {
+            border: 3px solid black;
+            padding: 4px;
+            width: 300px;
+            height: auto;
+        }
+        table {
+            text-align: center;
+        }
+    </style>
+    <center>
+        <h1>TICKET BOOKING SYSTEM</h1>
+        <div id="main">
+            <h3>ENTER</h3>
+            1. First Class &nbsp; 2. Economy Class<br>
+            Your Choice: <input id="in1" type="number" value="0"><br><br>
+            Your Name: <input id="inName" type="text" placeholder="Enter your name"><br><br>
+            <button onclick="assign()">Assign Seat</button>
+            <table cellpadding="4px">
+                <thead>
+                    <tr>
+                        <th>NAME</th>
+                        <th>SEAT NUMBER</th>
+                        <th>CLASS</th>
+                    </tr>
+                </thead>
+                <tbody id="tb"></tbody>
+            </table>
+        </div>
+    </center>
+    <script>
+        const seat = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        let fc = 5;
+        let ec = 5;
+
+        function assign() {
+            const choice = parseInt(document.getElementById('in1').value);
+            const name = document.getElementById('inName').value;
+
+            if (!name) {
+                alert("Please enter your name.");
+                return;
+            }
+
+            let as = -1;
+            let clas = '';
+
+            if (choice === 1) {
+                for (let i = 0; i < 5; i++) {
+                    if (seat[i] === 0) {
+                        seat[i] = 1;
+                        as = i + 1; // Seat numbers are 1-5 for first class
+                        fc--;
+                        clas='First Class';
+                        break;
+                    }
+                }
+                if (as === -1) {
+                    if (ec > 0) {
+                        if (confirm("First class full! May we book in Economy Class?")) {
+                            for (let i = 5; i < 10; i++) {
+                                if (seat[i] === 0) {
+                                    seat[i] = 1;
+                                    as = i + 1; // Seat numbers are 6-10 for economy
+                                    ec--;
+                                    clas='Economy Class';
+                                    break;
+                                }
+                            }
+                        } else {
+                            alert("No booking done!!!");
+                        }
+                    } else {
+                        alert("All seats booked!!");
+                    }
+                }
+            } else if (choice === 2) {
+                for (let i = 5; i < 10; i++) {
+                    if (seat[i] === 0) {
+                        seat[i] = 1;
+                        as = i + 1; // Seat numbers are 6-10 for economy
+                        ec--;
+                        clas='Economy Class'
+                        break;
+                    }
+                }
+                if (as === -1) {
+                    if (fc > 0) {
+                        if (confirm("Economy class full! May we book in First Class?")) {
+                            for (let i = 0; i < 5; i++) {
+                                if (seat[i] === 0) {
+                                    seat[i] = 1;
+                                    as = i + 1; // Seat numbers are 1-5 for first class
+                                    fc--;
+                                    clas='First Class';
+                                    break;
+                                }
+                            }
+                        } else {
+                            alert("No booking done!!!");
+                        }
+                    } else {
+                        alert("All seats booked!!");
+                    }
+                }
+            } else {
+                alert("Invalid Choice!");
+            }
+
+            
+
+            if (as !== -1) {
+                const tb = document.getElementById('tb');
+                const row = document.createElement('tr');
+                const nameCell = document.createElement('td');
+                const seatCell = document.createElement('td');
+                const classCell = document.createElement('td');
+
+                nameCell.textContent = name;
+                seatCell.textContent = as;
+                classCell.textContent = clas;
+
+                row.appendChild(nameCell);
+                row.appendChild(seatCell);
+                row.appendChild(classCell);
+                tb.appendChild(row);
+            }
+        }
+    </script>
+</body>
+</html>

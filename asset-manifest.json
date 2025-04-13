@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/WEBexcercises_BCE1064/static/css/main.e6c13ad2.css",
+    "main.js": "/WEBexcercises_BCE1064/static/js/main.975b645d.js",
+    "index.html": "/WEBexcercises_BCE1064/index.html",
+    "main.e6c13ad2.css.map": "/WEBexcercises_BCE1064/static/css/main.e6c13ad2.css.map",
+    "main.975b645d.js.map": "/WEBexcercises_BCE1064/static/js/main.975b645d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.975b645d.js"
+  ]
+}

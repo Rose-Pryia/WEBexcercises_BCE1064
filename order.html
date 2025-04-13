@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1064-Grocery Order Form</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #d3dbc5;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background-color: #6e7f55;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            color: white;
+            text-align: center;
+        }
+        input[type="text"], input[type="number"] {
+            width: 90%;
+            padding: 5px;
+            margin: 5px 0;
+            border-radius: 15px;
+            border: none;
+        }
+        .products {
+            text-align: left;
+            margin-top: 10px;
+        }
+        .product-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        .product-item img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            background-color: white; 
+            border-radius: 50%;
+        }
+        .submit-btn {
+            background-color: #a67c52;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Grocery Order Form</h2>
+        <label>First Name</label>
+        <input type="text" id="fname">
+        <label>Last Name</label>
+        <input type="text" id="lname">
+        <label>Phone Number</label>
+        <input type="text" id="ph">
+        <label>Email</label>
+        <input type="text" id="mail">
+        
+        <div class="products">
+            <h3>Products</h3>
+            <div class="product-item">
+                <input type="checkbox" id="apple-yes">
+                <img src="apples.jpg" alt="Apple">
+                <label>Apple $10/kg</label>
+                <input type="number" id="app" min="0">
+            </div>
+            <div class="product-item">
+                <input type="checkbox" id="banana-yes">
+                <img src="bananas.jpg" alt="Banana">
+                <label>Banana $5/kg</label>
+                <input type="number" id="ban" min="0">
+            </div>
+            <div class="product-item">
+                <input type="checkbox" id="avo-yes">
+                <img src="avacado.jpg" alt="Avocado">
+                <label>Avocado $7/kg</label>
+                <input type="number" id="avo" min="0">
+            </div>
+        </div>
+        
+        <button class="submit-btn" onclick="sendIt()">SUBMIT</button>
+    </div>
+    
+    <script>
+        function sendIt() {
+            const fn = document.getElementById('fname').value;
+            const ln = document.getElementById('lname').value;
+            const mob = document.getElementById('ph').value;
+            const em = document.getElementById('mail').value;
+            const appAmt = document.getElementById('apple-yes').checked ? document.getElementById('app').value : 0;
+            const banAmt = document.getElementById('banana-yes').checked ? document.getElementById('ban').value : 0;
+            const avoAmt = document.getElementById('avo-yes').checked ? document.getElementById('avo').value : 0;
+            
+            const stuff = {
+                fn, ln, mob, em, appAmt, banAmt, avoAmt
+            };
+            
+            localStorage.setItem('order', JSON.stringify(stuff));
+            window.location.href = 'reciept.html';
+        }
+    </script>
+</body>
+</html>

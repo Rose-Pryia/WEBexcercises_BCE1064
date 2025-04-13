@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1064</title>
+</head>
+<body>
+    <style>
+        #main {
+            border: 3px solid black;
+            padding: 4px;
+            width: 300px;
+            height: auto;
+        }
+        table {
+            text-align: center;
+            width: 300px;
+        }
+    </style>
+    <center>
+        <div id="main">
+            <table cellpadding="4px" border="2">
+                <thead>
+                    <tr>
+                        <th colspan="2">BMI CALCULATOR
+                            <select id="s1">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="tb">
+                    <tr>
+                        <th colspan="2">Enter Your Weight:<br>
+                            (in pounds) <input type="text" id="weight">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Enter Your Height:<br>
+                            (in feet) <input type="text" id="h1"><br><br>
+                            (in inches) <input type="text" id="h2">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="2"><button id="calc" onclick="calculate()
+                        ">Calculate</button>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>YOUR<BR>BMI</th>
+                        <th><input id="answer" type="text"></th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </center>
+    <script>
+        
+        function calculate(){
+            const g = document.getElementById('s1').value;
+            const w = parseFloat(document.getElementById('weight').value);
+            const h1 = parseFloat(document.getElementById('h1').value);
+            const h2 = parseFloat(document.getElementById('h2').value);
+            let hi = (h1 * 12) + h2;
+            const bmi=(703*w)/(hi*hi);
+            document.getElementById('answer').value= bmi.toFixed(2);
+            let category = "";
+            if (g==='Male'){
+                if (bmi < 17.50) category = "Anorexia";
+                else if (bmi < 20.70) category = "Underweight";
+                else if (bmi < 26.40) category = "Ideal Range";
+                else if (bmi < 27.80) category = "Marginally Overweight";
+                else if (bmi < 31.10) category = "Overweight";
+                else category = "Very Overweight or Obese";
+            }else {
+                if (bmi < 17.50) category = "Anorexia";
+                else if (bmi < 19.10) category = "Underweight";
+                else if (bmi < 25.80) category = "Ideal Range";
+                else if (bmi < 27.30) category = "Marginally Overweight";
+                else if (bmi < 32.30) category = "Overweight";
+                else category = "Very Overweight or Obese";
+            }
+            alert("Category: "+category);
+        }
+    </script>
+</body>
+</html>

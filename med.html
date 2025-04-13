@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Media Elements</title>
+</head>
+<body>
+    <h2>Audio</h2>
+    <audio controls>
+        <source src="aud.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio> 
+
+    <h2>Video</h2>
+    <video width="200" height="150" controls>
+        <source src="vid.mp4" type="video/mp4">
+        Your browser does not support the video element.
+    </video>
+
+    <h2>Canvas</h2>
+<canvas id="myCanvas" width="200" height="150">
+    Your browser does not support the canvas element.
+</canvas>
+
+<script>
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    ctx.fillStyle = '#8B0000';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = '#333333';
+    ctx.fillRect(canvas.width * 0.25, canvas.height * 0.25, canvas.width * 0.5, canvas.height * 0.5);
+
+    ctx.fillStyle = 'black';
+    ctx.fillRect(canvas.width * 0.275, canvas.height * 0.275, canvas.width * 0.45, canvas.height * 0.4);
+
+    ctx.beginPath();
+    ctx.fillStyle = 'yellow';
+    ctx.arc(canvas.width / 2, canvas.height / 2, canvas.height * 0.2, 0, 2 * Math.PI);
+    ctx.fill();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1064</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #87CEEB; 
+        }
+        canvas {
+            border: 1px solid #000;
+            background-color: #87CEEB; 
+        }
+    </style>
+</head>
+<body>
+    <canvas id="sceneCanvas" width="800" height="600"></canvas>
+
+    <script>
+        const canvas = document.getElementById('sceneCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function drawScene() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            drawSun(650, 100, 50, 'yellow');
+
+            drawHouse(100, 300, 150, 120, '#8B4513', '#A52A2A');
+
+            drawPond(400, 450, 300, 100, '#4682B4');
+
+            drawBoat(350, 425, '#8B4513'); 
+
+            drawDuck(500, 420, '#FFD700');
+
+            drawFlower(600, 350, '#FF69B4', '#008000');
+
+            drawStones(300, 500, 10, '#808080');
+        }
+
+        function drawSun(x, y, radius, color) {
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 3;
+            for (let i = 0; i < 12; i++) {
+                const angle = (i * Math.PI) / 6;
+                const x1 = x + Math.cos(angle) * radius;
+                const y1 = y + Math.sin(angle) * radius;
+                const x2 = x + Math.cos(angle) * (radius + 30);
+                const y2 = y + Math.sin(angle) * (radius + 30);
+
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+            }
+        }
+
+        function drawHouse(x, y, width, height, wallColor, roofColor) {
+            ctx.beginPath();
+            ctx.fillStyle = wallColor;
+            ctx.fillRect(x, y, width, height);
+            
+            ctx.fillStyle = '#4B2D0E';
+            ctx.fillRect(x + width/2 - 15, y + height - 50, 30, 50);
+            
+            ctx.fillStyle = '#87CEEB';
+            ctx.fillRect(x + 20, y + 30, 30, 30);
+            ctx.fillRect(x + width - 50, y + 30, 30, 30);
+
+            ctx.beginPath();
+            ctx.moveTo(x - 20, y);
+            ctx.lineTo(x + width / 2, y - 60);
+            ctx.lineTo(x + width + 20, y);
+            ctx.fillStyle = roofColor;
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function drawPond(x, y, width, height, color) {
+            ctx.beginPath();
+            ctx.ellipse(x, y, width/2, height/2, 0, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function drawBoat(x, y, color) {
+            ctx.fillStyle = color;
+            ctx.fillRect(x - 50, y, 100, 20); 
+
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(x - 50, y, 100, 20); 
+
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x, y - 50);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(x, y - 50);
+            ctx.lineTo(x + 30, y - 25);
+            ctx.lineTo(x, y);
+            ctx.closePath();
+            ctx.fillStyle = '#FFF';
+            ctx.fill();
+            ctx.stroke();
+        }
+
+        function drawDuck(x, y, color) {
+            ctx.beginPath();
+            ctx.arc(x, y, 20, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.closePath();
+            
+            ctx.beginPath();
+            ctx.arc(x + 25, y - 10, 12, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.closePath();
+            
+            ctx.beginPath();
+            ctx.moveTo(x + 35, y - 10);
+            ctx.lineTo(x + 50, y - 5);
+            ctx.lineTo(x + 35, y);
+            ctx.closePath();
+            ctx.fillStyle = '#FF6600';
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.arc(x + 28, y - 13, 2, 0, Math.PI * 2);
+            ctx.fillStyle = '#000';
+            ctx.fill();
+        }
+
+        function drawFlower(x, y, petalColor, stemColor) {
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x, y - 100);
+            ctx.strokeStyle = stemColor;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.moveTo(x, y - 60);
+            ctx.bezierCurveTo(
+                x - 20, y - 70,
+                x - 40, y - 60,
+                x - 30, y - 50
+            );
+            ctx.fillStyle = stemColor;
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.moveTo(x, y - 30);
+            ctx.bezierCurveTo(
+                x + 20, y - 40,
+                x + 40, y - 30,
+                x + 30, y - 20
+            );
+            ctx.fillStyle = stemColor;
+            ctx.fill();
+            
+            for (let i = 0; i < 8; i++) {
+                const angle = (i * Math.PI) / 4;
+                ctx.beginPath();
+                ctx.ellipse(
+                    x + Math.cos(angle) * 15,
+                    y - 100 + Math.sin(angle) * 15,
+                    15, 8,
+                    angle, 0, Math.PI * 2
+                );
+                ctx.fillStyle = petalColor;
+                ctx.fill();
+            }
+            
+            ctx.beginPath();
+            ctx.arc(x, y - 100, 10, 0, Math.PI * 2);
+            ctx.fillStyle = '#FFFF00';
+            ctx.fill();
+        }
+
+        function drawStones(x, y, radius, color) {
+            for (let i = 0; i < 15; i++) {
+                const offsetX = Math.random() * 200 - 100;
+                const offsetY = Math.random() * 60 - 30;
+                const stoneRadius = radius * (0.5 + Math.random());
+                
+                ctx.beginPath();
+                ctx.arc(x + offsetX, y + offsetY, stoneRadius, 0, Math.PI * 2);
+                
+                const grayValue = 100 + Math.floor(Math.random() * 100);
+                ctx.fillStyle = `rgb(${grayValue}, ${grayValue}, ${grayValue})`;
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+
+        drawScene();
+    </script>
+</body>
+</html>

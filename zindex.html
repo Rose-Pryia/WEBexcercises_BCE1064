@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1064</title>
+    <style>
+        .container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border: 2px solid black;
+            margin-bottom: 20px;
+        }
+        .box {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            font-size: 16px;
+            color: white;
+            font-weight: bold;
+            line-height: 100px;
+        }
+        .red { background-color: red; top: 20px; left: 20px; z-index: 1; }
+        .green { background-color: green; top: 50px; left: 50px; z-index: 2; }
+        .blue { background-color: blue; top: 80px; left: 80px; z-index: 3; }
+    </style>
+</head>
+<body>
+
+    <h2>Click the Buttons to Change Z-Index</h2>
+    
+    <div class="container">
+        <div class="box red" id="redBox">Red</div>
+        <div class="box green" id="greenBox">Green</div>
+        <div class="box blue" id="blueBox">Blue</div>
+    </div>
+
+    <button onclick="bringToFront('redBox')">Bring Red to Front</button>
+    <button onclick="bringToFront('greenBox')">Bring Green to Front</button>
+    <button onclick="bringToFront('blueBox')">Bring Blue to Front</button>
+
+    <p id="zIndexInfo">Z-Index: Red = 1, Green = 2, Blue = 3</p>
+
+    <script>
+        function bringToFront(boxId) {
+            let boxes = document.querySelectorAll(".box");
+
+            let maxZ = 0;
+            boxes.forEach(box => {
+                let zIndex = parseInt(window.getComputedStyle(box).zIndex);
+                if (zIndex > maxZ) {
+                    maxZ = zIndex;
+                }
+            });
+
+            let selectedBox = document.getElementById(boxId);
+            selectedBox.style.zIndex = maxZ + 1;
+
+            document.getElementById("zIndexInfo").innerText = 
+    `Z-Index: Red = ${window.getComputedStyle(redBox).zIndex}, 
+    Green = ${window.getComputedStyle(greenBox).zIndex}, 
+    Blue = ${window.getComputedStyle(blueBox).zIndex}`;
+
+        }
+    </script>
+
+</body>
+</html>

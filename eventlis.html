@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>23BCE1064</title>
+    <style>
+        table, th, td { border: 1px solid black; border-collapse: collapse; padding: 10px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <h2>Dynamic Table</h2>
+    <script>
+        function createTable() {
+            let table = document.createElement("table");
+            for (let i = 0; i < 3; i++) {
+                let row = table.insertRow();
+                for (let j = 0; j < 3; j++) {
+                    let cell = row.insertCell();
+                    cell.textContent = `(${i+1}, ${j+1})`;
+                }
+            }
+            document.body.appendChild(table);
+        }
+        createTable();
+    </script>
+
+    <h2>Button & Textbox</h2>
+    <script>
+        let btn = document.createElement("button");
+        btn.textContent = "Hover me";
+        btn.style.backgroundColor = "red";
+        btn.onmouseover = () => btn.style.backgroundColor = "green";
+        btn.onmouseout = () => btn.style.backgroundColor = "red";
+        document.body.appendChild(btn);
+
+        let textbox = document.createElement("input");
+        textbox.type = "text";
+        textbox.style.backgroundColor="green";
+        textbox.onfocus = () => textbox.style.backgroundColor = "yellow";
+        textbox.onchange = () => alert("Hello, you changed the text!");
+        document.body.appendChild(textbox);
+    </script>
+
+    <h2>Input to List</h2>
+    <script>
+        let inputField = document.createElement("input");
+        let addButton = document.createElement("button");
+        addButton.textContent = "Add";
+        let ul = document.createElement("ul");
+
+        addButton.ondblclick = () => {
+            let li = document.createElement("li");
+            li.textContent = inputField.value;
+            ul.appendChild(li);
+            inputField.value = "";
+        };
+
+        document.body.append(inputField, addButton, ul);
+    </script>
+
+    <h2>Keypress Counter</h2>
+    <script>
+        let keyInput = document.createElement("input");
+        let countDisplay = document.createElement("input");
+        let count = 0;
+
+        keyInput.onkeypress = () => {
+            count++;
+            countDisplay.value = ` Key Presses: ${count}`;
+        };
+
+        document.body.append(keyInput, countDisplay);
+    </script>
+
+</body>
+</html>

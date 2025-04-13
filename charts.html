@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1064</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+
+    <h2>Bar Chart</h2>
+    <div id="barChart" style="width: 500px; height: 400px;"></div>
+
+    <h2>Line Chart</h2>
+    <div id="lineChart" style="width: 500px; height: 400px;"></div>
+
+    <h2>Pie Chart</h2>
+    <div id="pieChart" style="width: 500px; height: 400px;"></div>
+
+    <h2>Donut Chart</h2>
+    <div id="donutChart" style="width: 500px; height: 400px;"></div>
+
+    <script>
+        Plotly.newPlot("barChart", [{
+            x: ["A", "B", "C", "D"],
+            y: [10, 20, 15, 30],
+            type: "bar",
+            marker: {color: ["red", "blue", "green", "purple"]}
+        }], {title: "Bar Chart", xaxis: {title: "Categories"}, yaxis: {title: "Values"}});
+
+        Plotly.newPlot("lineChart", [{
+            x: [1, 2, 3, 4, 5],
+            y: [3, 7, 9, 5, 12],
+            type: "scatter",
+            mode: "lines+markers",
+            marker: {color: "blue"}
+        }], {title: "Line Chart", xaxis: {title: "X-Axis"}, yaxis: {title: "Y-Axis"}});
+
+        Plotly.newPlot("pieChart", [{
+            labels: ["Red", "Blue", "Green", "Yellow"],
+            values: [30, 20, 25, 25],
+            type: "pie"
+        }], {title: "Pie Chart"});
+
+        Plotly.newPlot("donutChart", [{
+            labels: ["Rose", "Jasmine", "Marigold", "Iris"],
+            values: [40, 30, 15, 15],
+            type: "pie",
+            hole: 0.4
+        }], {title: "Donut Chart"});
+
+    </script>
+
+</body>
+</html>

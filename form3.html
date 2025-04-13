@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweater Feedback-23BCE1064</title>
+    <script>
+        function updateTotal() {
+            const slider1 = parseInt(document.getElementById("slider1").value);
+            const slider2 = parseInt(document.getElementById("slider2").value);
+            const slider3 = parseInt(document.getElementById("slider3").value);
+            const total = slider1 + slider2 + slider3;
+            document.getElementById("total").value = total;
+        }
+    </script>
+</head>
+<body >
+<body >
+
+    <h2 style="color: #333; text-align: center;">Sweater Feedback</h2>
+    
+    <form oninput="updateTotal()" style="max-width: 400px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <label for="slider1" style="display: block; margin-bottom: 10px; font-weight: bold;">Comfort:</label>
+        <input type="range" id="slider1" name="slider1" min="0" max="100" value="0" style="width: 100%; margin-bottom: 20px;"><br>
+
+        <label for="slider2" style="display: block; margin-bottom: 10px; font-weight: bold;">Design:</label>
+        <input type="range" id="slider2" name="slider2" min="0" max="100" value="0" style="width: 100%; margin-bottom: 20px;"><br>
+
+        <label for="slider3" style="display: block; margin-bottom: 10px; font-weight: bold;">Warmth:</label>
+        <input type="range" id="slider3" name="slider3" min="0" max="100" value="0" style="width: 100%; margin-bottom: 20px;"><br>
+
+        <label for="total" style="display: block; margin-bottom: 10px; font-weight: bold;">Total Feedback:</label>
+        <output id="total" name="total" style="display: block; margin-bottom: 20px; font-size: 1.2em; color: #007BFF;">0</output>
+
+        <button type="submit" >Submit Feedback</button>
+    </form>
+
+</body>
+</html>

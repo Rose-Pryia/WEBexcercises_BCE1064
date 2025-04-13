@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1064</title>
+</head>
+<body>
+    <style>
+    table{
+        border: 2px solid black;
+        text-align: center;
+        padding: 4px 4px 4px 4px;
+    }
+    #main{
+        display: flex;
+        flex-direction: row;
+        justify-content:center;
+        align-items:normal;
+        gap: 20px;
+        margin-top: 100px;
+        margin-bottom: 10px;
+    }
+    #searchResult{
+        border: 2px solid black;
+    }
+</style>
+<CENTER>
+    <h1>Hospital Patient Data</h1>
+    <hr style="border: 2px solid black; margin: 20px 0;">
+
+    <div id="main">
+        <div>
+            <button onclick="sort()">Sort by Age (Descending)</button>
+        </div>
+        <div>
+            <input type="number" id="searchId" placeholder="Enter P-Id">
+            <button onclick="search()">Search Patient</button>
+            <p id="searchResult"></p>
+        </div>
+        <div>
+            <input type="number" id="minAge" placeholder="Min Age">
+            <input type="number" id="maxAge" placeholder="Max Age">
+            <button onclick="filter()">Filter by Age</button>
+        </div>
+    </div>
+
+        <table border="3px" cellpadding="4px">
+            <thead>
+            <tr>
+                <th>PID</th>
+                <TH>NAME</TH>
+                <th>AGE</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
+        <script>
+             const patients = [
+            { PId: 1, Name: "Alen", Age: 39 },
+            { PId: 2, Name: "Deena", Age: 47 },
+            { PId: 3, Name: "Diana", Age: 21 },
+            { PId: 4, Name: "Jack", Age: 54 },
+            { PId: 5, Name: "Jain", Age: 23 },
+            { PId: 6, Name: "Kelvin", Age: 61 },
+            { PId: 7, Name: "Louis", Age: 69 },
+            { PId: 8, Name: "Rex", Age: 49 }
+        ];
+            function display(data){
+                const tb=document.getElementById('tbody');
+                tbody.innerHTML="";
+                data.forEach(i=>{
+                    let r=`<tr>
+                        <td>${i.PId}</td>
+                        <td>${i.Name}</td>
+                        <td>${i.Age}</td>
+                        </tr>`;
+                        tb.innerHTML+=r;
+                });
+
+            }
+            function sort(){
+                const data=[...patients].sort((a,b)=>b.Age-a.Age);
+                display(data);
+            }
+            function search(){
+                const id=parseInt(document.getElementById('searchId').value);
+                const patient = patients.find(p => p.PId === id);
+                const resultArea = document.getElementById("searchResult");
+                if (patient) {
+                    resultArea.innerHTML = `Found: ${patient.Name}, Age: ${patient.Age}`;
+                }
+                else{
+                    resultArea.innerHTML = "Patient not found!";
+                }
+            }
+
+            function filter(){
+                const minAge = parseInt(document.getElementById("minAge").value);
+                const maxAge = parseInt(document.getElementById("maxAge").value);
+                const data=patients.filter(p=>p.Age>=minAge && p.Age<=maxAge);
+                display(data);
+            }
+            display(patients);
+
+        </script>
+</body>
+</html>

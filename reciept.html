@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1064-Receipt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d3dbc5;
+            text-align: center;
+        }
+        .container {
+            background: #6e7f55;
+            color: white;
+            padding: 20px;
+            width: 300px;
+            margin: auto;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Order Receipt</h2>
+        <p id="receipt"></p>
+        <button onclick="window.history.back()">Go Back</button>
+    </div>
+
+    <script>
+        let order = JSON.parse(localStorage.getItem("order"));
+        let cost={a:10, b:5, av:7};
+        
+        if (order) {
+            let appleCost = order.appAmt * cost.a;
+            let bananaCost = order.banAmt * cost.b;
+            let avocadoCost = order.avoAmt * cost.av;
+            let totalCost = appleCost + bananaCost + avocadoCost;
+            
+            document.getElementById("receipt").innerHTML = `
+                <strong>First Name:</strong> ${order.fn} <br>
+                <strong>Last Name:</strong> ${order.ln} <br>
+                <strong>Phone:</strong> ${order.mob} <br>
+                <strong>Email:</strong> ${order.em} <br><br>
+                <strong>Order Details:</strong><br>
+                Apple: ${order.appAmt} kg - $${appleCost} <br>
+                Banana: ${order.banAmt} kg - $${bananaCost} <br>
+                Avocado: ${order.avoAmt} kg - $${avocadoCost} <br>
+                <br>
+                <strong>Total Price: $${totalCost}</strong>
+            `;
+        } else {
+            document.getElementById("receipt").innerHTML = "No order found!";
+        }
+    </script>
+
+</body>
+</html>

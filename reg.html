@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>23BCE1064</title>
+    <style>
+        #regno {
+            border: 5px solid red;
+            text-align: center;
+            width: 100px;
+            margin: 20px auto;
+        }
+        #name {
+            color: red;
+            text-align: center;
+            border: 3px solid black;
+            width: 100px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="name"></div>
+    <script>
+        const regNo = prompt("Enter your registration number:");
+        const name = prompt("Enter your name:");
+
+        document.write(`<div id="regno">${regNo}</div>`);
+
+        document.getElementById("name").innerHTML = `${name}`;
+    </script>
+   
+   
+</body>
+</html>
