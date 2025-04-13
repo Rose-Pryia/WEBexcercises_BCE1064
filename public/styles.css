@@ -1,0 +1,49 @@
+
+
+h1{
+    text-align: center;
+    background-image: linear-gradient(to left, red, orange, yellow, green, blue, indigo, violet);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+body {
+    background-image: url('bgp.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    animation: rainbow 5s infinite;
+    text-align: center;
+    font-size: 2.5em;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: inline-block;
+    border-radius: 10px;
+}
+
+.description {
+    column-count: 3;
+    column-gap: 40px;
+    line-height: 30pt;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+@keyframes playBall {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(100px, -50px) rotate(180deg) skew(10deg); }
+    100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+.ball {
+    animation: playBall 3s infinite;
+    display: block;
+    margin: 40px auto;
+}

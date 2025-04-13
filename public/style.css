@@ -1,0 +1,20 @@
+body{
+    a: center;
+
+}
+table{
+    color:white;
+    border-color: orange;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 200;
+}
+th{
+    background-color: orange;
+}
+ul{
+   color: rgb(40, 144, 219); 
+}
+li::marker{
+    color:grey;
+}

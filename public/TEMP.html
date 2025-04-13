@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1064</title>
+</head>
+<body>
+    <style>
+        table{
+            border: 2px solid black;
+            text-align: center;
+            padding: 4px 4px 4px 4px;
+        }
+    </style>
+    <CENTER>
+            <table border="3px" cellpadding="4px">
+                <thead>
+                <tr>
+                    <th>DAY</th>
+                    <TH>TEMPERATURE</TH>
+                    <th>CATEGORY</th>
+                </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+            <p id="p"></p>
+    </CENTER>
+    <script>
+        const templ = [55,62,68,74,59,45,41,58,60,67,65,78,82,88,91,92,90,93,87,80,78,79,72,68,61,59,55,65];
+        let hd=0;
+        let cd=0;
+        let pd=0;
+        function tc(temp){
+            if (temp>=85){
+                hd++;
+                return "HOT";
+            }
+            else if (temp>=60 && temp<=84){
+                pd++;
+                return 'PLEASANT';
+            }else{
+                cd++;
+                return 'COLD';
+            }
+        }
+        const tb=document.getElementById('tbody');
+        templ.forEach((temp,index)=>{
+            const row=document.createElement('tr');
+            const day=document.createElement('td');
+            const tp=document.createElement('td');
+            const cat=document.createElement('td');
+            day.textContent=index+1;
+            tp.textContent=temp;
+            cat.textContent=tc(temp);
+            row.appendChild(day);
+            row.appendChild(tp);
+            row.appendChild(cat);
+            tb.appendChild(row);
+        });
+        const summary="Number of Hot Days= "+hd+"<br>Number of Pleasant Days= "+pd+"<br>Number of Cold Days= "+cd;
+        document.getElementById('p').innerHTML= summary;
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1064</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 600px;
+            padding: 20px;
+            background-color: white;
+            border: 2px solid black;
+            box-shadow: 5px 5px 10px gray;
+            margin-top: 20px;
+        }
+        .clock {
+            text-align: right;
+            font-weight: bold;
+        }
+        fieldset {
+            border: 2px solid black;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+        legend {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 99%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+        .inline {
+            display: flex;
+            align-items: center;
+        }
+        .inline input {
+            width: auto;
+            margin-right: 5px;
+        }
+        .button-group {
+            text-align: center;
+        }
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        #printDetails {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border: 2px solid black;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="clock" id="clock">Time: 00:00:00</div>
+        <h2>Form Validation</h2>
+        <form id="myForm">
+            
+            <fieldset>
+                <legend>Personal Details</legend>
+                <label>Name*:</label>
+                <input type="text" id="name">
+                <span class="error" id="nameError"></span>
+
+                <label>Address*:</label>
+                <textarea id="address"></textarea>
+                <span class="error" id="addressError"></span>
+
+                <label>Gender*:</label>
+                <div class="inline">
+                    <input type="radio" name="gender" value="Male"> Male
+                    <input type="radio" name="gender" value="Female"> Female
+                </div>
+                <span class="error" id="genderError"></span>
+            </fieldset>
+
+            <fieldset>
+                <legend>Contact Information</legend>
+                <label>Zip Code*:</label>
+                <input type="text" id="zip">
+                <span class="error" id="zipError"></span>
+
+                <label>Country*:</label>
+                <select name="country">
+                    <option value="">Please select...</option>
+                    <option value="India">India</option>
+                    <option value="USA">USA</option>
+                    <option value="UK">UK</option>
+                </select>
+                <span class="error" id="countryError"></span>
+
+                <label>Phone*:</label>
+                <input type="text" id="phone">
+                <span class="error" id="phoneError"></span>
+
+                <label>Email*:</label>
+                <input type="email" id="email">
+                <span class="error" id="emailError"></span>
+            </fieldset>
+
+            <fieldset>
+                <legend>Preferences</legend>
+                <div class="inline">
+                    <input type="checkbox" name="preferences" value="Red"> Red
+                    <input type="checkbox" name="preferences" value="Green"> Green
+                    <input type="checkbox" name="preferences" value="Blue"> Blue
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Login Credentials</legend>
+                <label>Password*:</label>
+                <input type="password" id="password">
+                <span class="error" id="passwordError"></span>
+            </fieldset>
+
+            <fieldset>
+                <legend>Verification</legend>
+                <label>PAN Number*:</label>
+                <input type="text" id="pan">
+                <span class="error" id="panError"></span>
+            </fieldset>
+
+            <div class="button-group">
+                <button type="button" onclick="validateForm()">SEND</button>
+                <button type="reset">CLEAR</button>
+                <button type="button" onclick="printForm()">PRINT</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="printDetails">
+        <h3>Entered Details</h3>
+        <p><strong>Name:</strong> <span id="p_name"></span></p>
+        <p><strong>Address:</strong> <span id="p_address"></span></p>
+        <p><strong>Gender:</strong> <span id="p_gender"></span></p>
+        <p><strong>Zip Code:</strong> <span id="p_zip"></span></p>
+        <p><strong>Country:</strong> <span id="p_country"></span></p>
+        <p><strong>Phone:</strong> <span id="p_phone"></span></p>
+        <p><strong>Email:</strong> <span id="p_email"></span></p>
+        <p><strong>PAN Number:</strong> <span id="p_pan"></span></p>
+    </div>
+
+    <script>
+        function updateTime() {
+            let now = new Date();
+            document.getElementById("clock").innerText = `Time: ${now.toLocaleTimeString()}`;
+        }
+        setInterval(updateTime, 1000);
+
+        function printForm() {
+            document.getElementById("p_name").innerText = document.getElementById("name").value;
+            document.getElementById("p_address").innerText = document.getElementById("address").value;
+            document.getElementById("p_gender").innerText = document.querySelector('input[name="gender"]:checked')?.value || "Not selected";
+            document.getElementById("p_zip").innerText = document.getElementById("zip").value;
+            document.getElementById("p_country").innerText = document.querySelector('select[name="country"]').value;
+            document.getElementById("p_phone").innerText = document.getElementById("phone").value;
+            document.getElementById("p_email").innerText = document.getElementById("email").value;
+            document.getElementById("p_pan").innerText = document.getElementById("pan").value;
+            document.getElementById("printDetails").style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
+

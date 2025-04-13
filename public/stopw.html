@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>23BCES1064</title>
+    <style>
+        
+        body {
+            border: 5px solid black;
+            padding: 20px;
+            width: 300px; 
+            text-align: center;
+            margin: 50px auto; 
+            
+        }
+
+        #timer {
+            border: 5px solid black;
+            padding: 1px;
+            width: 80px;
+            text-align: center;
+            font-size: 1.5em; 
+            margin: 10px auto; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <h2>Stopwatch</h2>
+    <p id="timer">0.00s</p>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <button id="reset">Reset</button>
+
+    <script>
+        let startTime, timer;
+        let display = document.getElementById("timer");
+        let startBtn = document.getElementById("start");
+        let stopBtn = document.getElementById("stop");
+        let resetBtn = document.getElementById("reset");
+
+        startBtn.onclick = () => {
+            startTime = Date.now();
+            timer = setInterval(() => {
+                display.textContent = `${((Date.now() - startTime) / 1000).toFixed(2)}s`;
+            }, 100);
+        };
+
+        stopBtn.onclick = () => clearInterval(timer);
+        resetBtn.onclick = () => { clearInterval(timer); display.textContent = "0.00s"; };
+    </script>
+
+    <h2>Age Calculator</h2>
+    <input type="date" id="dob">
+    <p id="ageDisplay"></p>
+
+    <script>
+        let dobInput = document.getElementById("dob");
+dobInput.onmouseover = () => {
+    if (dobInput.value) {  
+        let birthDate = new Date(dobInput.value);
+        let currentDate = new Date();
+        let age = currentDate.getFullYear() - birthDate.getFullYear();
+
+        if (currentDate < new Date(currentDate.getFullYear(), birthDate.getMonth(), birthDate.getDate())) {
+            age--;
+        }
+
+        alert(`Your age is: ${age}`);
+    }
+};
+    </script>
+
+    <h2>Character Counter</h2>
+    <textarea id="textArea"></textarea>
+    <p>Characters: <span id="charCount">0</span></p>
+
+    <script>
+        let textarea = document.getElementById("textArea");
+        let charCount = document.getElementById("charCount");
+
+        textarea.oninput = () => charCount.textContent = `Characters: ${textarea.value.length}`;
+    </script>
+
+</body>
+</html>
